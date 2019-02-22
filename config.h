@@ -2,3 +2,19 @@
 //Чтение из файла конфигураций
 //Ф-я установки конфигураций по-умолчанию
 //Ф-я установки пользовательских настроек
+#ifndef _CONFIG_H_
+#define _CONFIG_H_
+
+#include "stdbool.h"
+typedef struct Config{
+    int col;
+    int row;
+    int n_it;
+    char rule;
+    bool out;
+} *config;
+
+void defaultConfig(config conf);
+
+
+#endif
