@@ -1,13 +1,11 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-int main(){
-        for(int i = 0; i < 10;i++){
-                for(int j = 0; j < 10; j++)
-                        if (j == 7 && i == 4)
-                                printf("\u25d9 ");
-                                else printf("\u25cb ");
-        printf("\n");
-        }
+//Живая - \u25d9
+//Мёртвая - \u25cb
+
+int main(int argc, char* argv[]){
+        //Чтение линии полецень, создание переменной структуры Configuration,
+        //Вызов ф-ии Game , передавая туда переменную Conf и путь к сохранению
         return 0;
 }
