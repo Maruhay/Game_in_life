@@ -4,6 +4,8 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "stdbool.h"
 typedef struct Config{
     int col;
@@ -14,6 +16,7 @@ typedef struct Config{
 } *config;
 
 void defaultConfig(config conf);
+void userConfig(config conf);
 
 
 #endif

@@ -8,7 +8,7 @@
 
 int main(int argc, char* argv[]){
         config conf = malloc(sizeof conf);
-        defaultConfig(conf);
-        
+        userConfig(conf);
+        printf("%d %d", conf->row, conf->col);
         return 0;
 }
