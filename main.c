@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "config.h"
+#include "game.h"
 
 //Живая - \u25d9
 //Мёртвая - \u25cb
@@ -9,6 +9,8 @@
 int main(int argc, char* argv[]){
         config conf = malloc(sizeof conf);
         userConfig(conf);
-        printf("%d %d", conf->row, conf->col);
+        bool **matrix = (bool **)malloc(conf->row * sizeof(bool *));
+        matGen(matrix, conf);
+        Neumann(matrix, conf);
         return 0;
 }
