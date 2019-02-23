@@ -6,6 +6,9 @@
 #define _CONFIG_H_
 
 #include "stdbool.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef struct Config{
     int col;
     int row;
@@ -16,5 +19,7 @@ typedef struct Config{
 
 void defaultConfig(config conf);
 
+void userConfig(config conf);
 
+void fileConfig(config conf, char* fname);
 #endif
