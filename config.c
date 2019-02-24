@@ -24,6 +24,46 @@ void userConfig(config conf){
     scanf("%d", &conf->out);
 }
 
+void chooseConfig(config conf){
+    char temp;
+    bool isOk;
+    do{
+        printf("Do you want to load configurations from file? (y/n)\n");
+        scanf(" %c", &temp);
+        if(temp == 'y'){
+            isOk = true;
+            char fname[20];
+            printf("Please enter name of file: ");
+            scanf(" %s", fname);
+            printf("FILE: %s\n ", fname);
+            fileConfig(conf, fname);
+        }
+        else if (temp == 'n'){
+            do{
+                printf("Do you want to setup default configuration? (y/n)\n");
+                scanf(" %c", &temp);
+                if(temp == 'y'){
+                    defaultConfig(conf);
+                    isOk = true;
+                }
+                else if(temp == 'n'){
+                    userConfig(conf);
+                    isOk = true;
+                }
+                else{
+                    printf("Please type y or n\n");
+                    isOk = false;
+                }
+                }while (isOk == false); 
+            }
+            else{
+                printf("Please type y or n\n");
+                isOk = false;
+        }
+                        
+    }while (isOk == false);
+}
+
 void fileConfig(config conf, char* fname){
     FILE *file;
     bool isOk = true; 

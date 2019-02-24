@@ -10,10 +10,13 @@ void matGen(bool **matrix, config conf){
 }
 
 void Neumann(bool **matrix, config conf){
-
     for (int i = 0 ; i < conf->row; i++){
         for (int j = 0; j < conf->col; j++)
             printf("%d ", matrix[i][j]);
             printf("\n");
     }
+}
+
+void startGame(config conf){
+    
 }

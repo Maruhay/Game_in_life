@@ -21,5 +21,7 @@ void defaultConfig(config conf);
 
 void userConfig(config conf);
 
+void chooseConfig(config conf);
+
 void fileConfig(config conf, char* fname);
 #endif

@@ -6,8 +6,10 @@
 #include "stdbool.h"
 #include "config.h"
 
-void matGen (bool ** , config conf);
+void matGen(bool ** , config conf);
 
-void Neumann (bool ** , config conf);
+void Neumann(bool ** , config conf);
 
-void Moore ();
+void Moore();
+
+void startGame(config conf);
