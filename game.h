@@ -10,7 +10,7 @@
 #include "config.h"
 
 void matGen (bool ** , config conf);
-void Neumann (bool ** , config conf);
-void Moore (bool ** , config conf);
+bool** Neumann (bool ** , config conf);
+bool** Moore (bool ** , config conf);
 
 #endif
