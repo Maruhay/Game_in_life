@@ -11,6 +11,6 @@
 
 void matGen (bool ** , config conf);
 void Neumann (bool ** , config conf);
-void Moore ();
+void Moore (bool ** , config conf);
 
 #endif

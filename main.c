@@ -10,7 +10,9 @@ int main(int argc, char* argv[]){
         config conf = malloc(sizeof conf);
         userConfig(conf);
         bool **matrix = (bool **)malloc(conf->row * sizeof(bool *));
+        for (int i = 1 ; i <= conf->row; i++)
+                matrix[i] = (bool *)malloc(conf->col * sizeof(bool));
         matGen(matrix, conf);
-        Neumann(matrix, conf);
+        Moore(matrix, conf);
         return 0;
 }
