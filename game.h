@@ -15,7 +15,7 @@ void matGen(bool ** , config conf);
 
 bool cmpMat(bool** , bool** , config conf);
 
-bool Neumann(bool ** , config conf);
+bool** Neumann(bool ** , config conf);
 
 bool** Moore(bool ** , config conf);
 

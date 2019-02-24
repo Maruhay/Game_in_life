@@ -15,7 +15,7 @@ bool cmpMat(bool** matrix1, bool** matrix2, config conf){
     return false;
 }
 
-bool Neumann (bool** matrix, config conf) {
+bool** Neumann (bool** matrix, config conf) {
     int sum;
     // Creating of temporary matrix
     bool** tempMat = (bool **)malloc(conf->row * sizeof(bool *));
@@ -123,8 +123,13 @@ bool Neumann (bool** matrix, config conf) {
             }
         } 
     }
-    printMatrix(tempMat, conf);
-    return cmpMat(matrix, tempMat, conf);
+    printMatrix(matrix, conf);
+    if(!cmpMat(matrix, tempMat, conf)){
+        for(int i = 1; i <= conf->row; i++)
+            for(int j = 1; j <= conf->col; j++)
+                tempMat[i][j] = 0;
+    }
+    return tempMat;
 }
 
 bool** Moore (bool **matrix, config conf) {
@@ -286,7 +291,7 @@ void startGame(config conf, char* saveName){
     bool isContinue = true;
     while(i < conf->n_it && isContinue){
         if(conf->rule == 'N')
-            Neumann(matrix, conf);
+            matrix = Neumann(matrix, conf);
         else if (conf->rule == 'M')
             matrix = Moore(matrix, conf);
         int sum = 0;
