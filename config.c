@@ -1,21 +1,23 @@
 #include "config.h"
 
 void defaultConfig(config conf){
-    conf->col = 15;
-    conf->row = 15;
-    conf->n_it = 100;
+    conf->col = 10;
+    conf->row = 10;
+    conf->n_it = 10;
     conf->rule = 'M';
     conf->out = 1; //'0' - "0 or 1"; '1' - "\u25d9 or \u25cb"
 }
 
-void userConfig(config conf){
+void userConfig(config conf, bool isSave){
     //
     //Проверка на правильность введённых данных
     //
-    printf("Number of rows: ");
-    scanf("%d", &conf->row);
-    printf("Number of columns: ");
-    scanf("%d", &conf->col);
+    if(isSave){
+        printf("Number of rows: ");
+        scanf("%d", &conf->row);
+        printf("Number of columns: ");
+        scanf("%d", &conf->col);
+    }
     printf("Number of iterations: ");
     scanf("%d", &conf->n_it);
     printf("Choose the rules: ");
@@ -24,7 +26,7 @@ void userConfig(config conf){
     scanf("%d", &conf->out);
 }
 
-void chooseConfig(config conf){
+void chooseConfig(config conf, bool isSave){
     char temp;
     bool isOk;
     do{
@@ -47,7 +49,7 @@ void chooseConfig(config conf){
                     isOk = true;
                 }
                 else if(temp == 'n'){
-                    userConfig(conf);
+                    userConfig(conf, isSave);
                     isOk = true;
                 }
                 else{
@@ -67,9 +69,8 @@ void chooseConfig(config conf){
 void fileConfig(config conf, char* fname){
     FILE *file;
     bool isOk = true; 
-    if(file = fopen(fname, "r"))
-        file = fopen(fname, "r");
-    else{
+    file = fopen(fname, "r");
+    if(file == NULL){
         printf("File %s not found. Configurations are setuped as default\n", fname);
         defaultConfig(conf);
         return;
@@ -80,6 +81,7 @@ void fileConfig(config conf, char* fname){
         defaultConfig(conf);
         return;
     }
+    fclose(file);
     //
     //Проверка правильности введённых данных
     //
