@@ -1,13 +1,13 @@
 //Структура конфигурации: размер сетки, кол-во итераций, тип соседства, тип вывода
 //Чтение из файла конфигураций
 //Ф-я установки конфигураций по-умолчанию
+//Ф-я установки пользовательских настроек
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
+#include "stdbool.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include "stdbool.h"
 
 typedef struct Config{
     int col;
@@ -18,7 +18,10 @@ typedef struct Config{
 } *config;
 
 void defaultConfig(config conf);
+
 void userConfig(config conf);
 
+void chooseConfig(config conf);
 
+void fileConfig(config conf, char* fname);
 #endif
