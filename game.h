@@ -2,15 +2,23 @@
 //2 функции двух видов соседств
 //Вывод в консоль
 //Функции для либо рандомного заполнения сетки, либо чтение из сейва
-
-#ifndef _GAME_H_
-#define _GAME_H_
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
 
 #include "stdbool.h"
 #include "config.h"
 
-void matGen (bool ** , config conf);
-bool** Neumann (bool ** , config conf);
-bool** Moore (bool ** , config conf);
+void matGen(bool ** , config conf);
 
-#endif
+bool cmpMat(bool** , bool** , config conf);
+
+bool** Neumann(bool ** , config conf);
+
+bool** Moore(bool ** , config conf);
+
+void printMatrix(bool** matrix, config conf);
+
+void startGame(config conf, char* saveName);
