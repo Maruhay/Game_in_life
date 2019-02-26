@@ -11,13 +11,13 @@
 #include "stdbool.h"
 #include "config.h"
 
-void matGen(bool ** , config );
+void matGen(bool** , config );
 
 bool cmpMat(bool** , bool** , config );
 
-bool** Neumann(bool ** , config );
+bool** Neumann(bool** , config );
 
-bool** Moore(bool ** , config );
+bool** Moore(bool** , config );
 
 void clrscr();
 

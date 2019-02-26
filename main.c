@@ -8,5 +8,6 @@ int main(int argc, char* argv[]){
         else ;
         //Иначе чтение сейва и снова надо спросить про конфигурацию
         startGame(conf, argv[1]);
+        free(conf);
         return 0;
 }

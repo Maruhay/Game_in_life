@@ -17,10 +17,12 @@ bool cmpMat(bool** matrix1, bool** matrix2, config conf){
 
 bool** Neumann (bool** matrix, config conf) {
     int sum;
-    // Creating of temporary matrix
-    bool** tempMat = (bool **)malloc(conf->row * sizeof(bool *));
-        for (int i = 1 ; i <= conf->row; i++)
-                tempMat[i] = (bool *)malloc(conf->col * sizeof(bool));
+    // Creating temporary matrix
+    bool ** tempMat = malloc(conf->row*sizeof(bool*) + conf->row*conf->col*sizeof(bool));
+    char * pc = tempMat;
+    pc += conf->row*sizeof(bool*);
+    for (int i = 1; i <= conf->row; i++)
+        tempMat[i] = pc + i*sizeof(conf->col*sizeof(bool));
     for (int i = 1 ; i <= conf->row; i++)
         for (int j = 1; j <= conf->col; j++)
             tempMat[i][j] = matrix[i][j];
@@ -123,21 +125,27 @@ bool** Neumann (bool** matrix, config conf) {
             }
         } 
     }
-    printMatrix(matrix, conf);
+    printMatrix(tempMat, conf);
     if(!cmpMat(matrix, tempMat, conf)){
         for(int i = 1; i <= conf->row; i++)
             for(int j = 1; j <= conf->col; j++)
                 tempMat[i][j] = 0;
     }
-    return tempMat;
+    for(int i = 1; i <= conf->row; i++)
+            for(int j = 1; j <= conf->col; j++)
+                matrix[i][j] = tempMat[i][j];
+    free(tempMat);
+    return matrix;
 }
 
-bool** Moore (bool **matrix, config conf) {
+bool** Moore (bool** matrix, config conf) {
     int sum;
-    // Creating of temporary matrix
-    bool **tempMat = (bool **)malloc(conf->row * sizeof(bool *));
-        for (int i = 1 ; i <= conf->row; i++)
-                tempMat[i] = (bool *)malloc(conf->col * sizeof(bool));
+    // Creating temporary matrix
+    bool ** tempMat = malloc(conf->row*sizeof(bool*) + conf->row*conf->col*sizeof(bool));
+    char * pc = tempMat;
+    pc += conf->row*sizeof(bool*);
+    for (int i = 1; i <= conf->row; i++)
+        tempMat[i] = pc + i*sizeof(conf->col*sizeof(bool));
     for (int i = 1 ; i <= conf->row; i++)
         for (int j = 1; j <= conf->col; j++)
             tempMat[i][j] = matrix[i][j];
@@ -246,18 +254,26 @@ bool** Moore (bool **matrix, config conf) {
             }
         } 
     }
-    printMatrix(matrix, conf);
+    printMatrix(tempMat, conf);
     if(!cmpMat(matrix, tempMat, conf)){
         for(int i = 1; i <= conf->row; i++)
             for(int j = 1; j <= conf->col; j++)
                 tempMat[i][j] = 0;
     }
-    return tempMat;
+    for(int i = 1; i <= conf->row; i++)
+            for(int j = 1; j <= conf->col; j++)
+                matrix[i][j] = tempMat[i][j];
+    free(tempMat);
+    return matrix;
 }
 
 void clrscr()
 {
-    system("@cls||clear");
+    #ifdef _WIN32
+    system("@cls");
+    #else
+    system("clear");
+    #endif
 }
 
 void printMatrix(bool** matrix, config conf){
@@ -285,10 +301,12 @@ void printMatrix(bool** matrix, config conf){
 
 void startGame(config conf, char* saveName){
     //Memory for matrix
-    bool **matrix = (bool **)malloc(conf->row * sizeof(bool *));
+    bool ** matrix = malloc(conf->row*sizeof(bool*) + conf->row*conf->col*sizeof(bool));
+    char * pc = matrix;
+    pc += conf->row*sizeof(bool*);
     for (int i = 1; i <= conf->row; i++)
-       matrix[i] = (bool *)malloc(conf->col * sizeof(bool));
-    
+        matrix[i] = pc + i*sizeof(conf->col*sizeof(bool));
+
     if(saveName == NULL)
         matGen(matrix, conf);
     else; //Функция загрузки матрицы из сейва 
@@ -306,4 +324,5 @@ void startGame(config conf, char* saveName){
         isContinue = sum;
         i++;
     } 
+    free(matrix);
 }

@@ -5,7 +5,7 @@ void defaultConfig(config conf){
     conf->row = 15;
     conf->n_it = 100;
     conf->rule = 'M';
-    conf->out = 1; //'0' - "0 or 1"; '1' - "\u25d9 or \u25cb"
+    conf->out = 0; //'0' - "0 or 1"; '1' - "\u25d9 or \u25cb"
 }
 
 void userConfig(config conf){
