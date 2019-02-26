@@ -255,8 +255,13 @@ bool** Moore (bool **matrix, config conf) {
     return tempMat;
 }
 
+void clrscr()
+{
+    system("@cls||clear");
+}
+
 void printMatrix(bool** matrix, config conf){
-    printf("\e[1;1H\e[2J");
+    clrscr();
     for (int i = 1 ; i <= conf->row; i++){
         for (int j = 1; j <= conf->col; j++){
             if(conf->out == 0)

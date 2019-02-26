@@ -11,14 +11,16 @@
 #include "stdbool.h"
 #include "config.h"
 
-void matGen(bool ** , config conf);
+void matGen(bool ** , config );
 
-bool cmpMat(bool** , bool** , config conf);
+bool cmpMat(bool** , bool** , config );
 
-bool** Neumann(bool ** , config conf);
+bool** Neumann(bool ** , config );
 
-bool** Moore(bool ** , config conf);
+bool** Moore(bool ** , config );
 
-void printMatrix(bool** matrix, config conf);
+void clrscr();
 
-void startGame(config conf, char* saveName);
+void printMatrix(bool** , config );
+
+void startGame(config , char* );
