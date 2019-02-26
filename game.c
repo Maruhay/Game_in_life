@@ -1,4 +1,5 @@
 #include "game.h"
+#include "logger.h"
 
 void matGen(bool** matrix, config conf){
     srand(time(NULL));
@@ -322,6 +323,7 @@ void startGame(config conf, char* saveName){
             for (int j = 1; j <= conf->col; j++)
                 sum += matrix[k][j];
         isContinue = sum;
+        saveLog(matrix, conf, i);
         i++;
     } 
     free(matrix);

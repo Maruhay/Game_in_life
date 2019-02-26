@@ -7,6 +7,6 @@
 
 int n_save;
 
-void saveLog(bool**, config conf, int n_it);
+void saveLog(bool**, config , int );
 
-bool** loadLog(char* fname, config conf);
+bool** loadLog(char* , config );
