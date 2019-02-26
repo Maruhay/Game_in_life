@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[]){
         config conf = malloc(sizeof conf);
-        printf("\e[1;1H\e[2J");
+        clrscr();
         if(argc < 2)
                 chooseConfig(conf);
         else ;

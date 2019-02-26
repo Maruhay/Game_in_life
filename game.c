@@ -123,13 +123,16 @@ bool** Neumann (bool** matrix, config conf) {
             }
         } 
     }
-    printMatrix(matrix, conf);
-    if(!cmpMat(matrix, tempMat, conf)){
+    printMatrix(tempMat, conf);
+    matrix = tempMat;
+  //  if(!cmpMat(matrix, tempMat, conf)){
         for(int i = 1; i <= conf->row; i++)
             for(int j = 1; j <= conf->col; j++)
-                tempMat[i][j] = 0;
-    }
-    return tempMat;
+                free(tempMat[i]);
+        free(tempMat);
+   // }
+    
+    return matrix;
 }
 
 bool** Moore (bool **matrix, config conf) {
@@ -246,17 +249,29 @@ bool** Moore (bool **matrix, config conf) {
             }
         } 
     }
-    printMatrix(matrix, conf);
-    if(!cmpMat(matrix, tempMat, conf)){
-        for(int i = 1; i <= conf->row; i++)
+    printMatrix(tempMat, conf);
+    for(int z = 1; z <= conf->row; z++)
+            for(int x = 1; x <= conf->col; x++)
+                matrix[z][x] = tempMat[z][x];
+  //  if(!cmpMat(matrix, tempMat, conf)){
+        for(int i = 1; i <= conf->row; i++) {
+            free(tempMat[i]);
             for(int j = 1; j <= conf->col; j++)
-                tempMat[i][j] = 0;
-    }
-    return tempMat;
+                matrix[i][j] = tempMat[i][j];
+        }
+        free(tempMat);
+   // }
+    
+    return matrix;
+}
+
+void clrscr()
+{
+    system("@cls||clear");
 }
 
 void printMatrix(bool** matrix, config conf){
-    printf("\e[1;1H\e[2J");
+    clrscr();
     for (int i = 1 ; i <= conf->row; i++){
         for (int j = 1; j <= conf->col; j++){
             if(conf->out == 0)
