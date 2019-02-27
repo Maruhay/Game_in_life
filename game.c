@@ -139,7 +139,7 @@ bool** Neumann (bool** matrix, config conf) {
     return matrix;
 }
 
-bool** Moore (bool** matrix, config conf) {
+bool** Moore (bool** matrix, config conf){
     int sum;
     // Creating temporary matrix
     bool ** tempMat = malloc(conf->row*sizeof(bool*) + conf->row*conf->col*sizeof(bool));
@@ -301,16 +301,19 @@ void printMatrix(bool** matrix, config conf){
 }
 
 void startGame(config conf, char* saveName){
+    if(saveName != NULL)
+        loadRowCol(conf, saveName);
     //Memory for matrix
     bool ** matrix = malloc(conf->row*sizeof(bool*) + conf->row*conf->col*sizeof(bool));
     char * pc = matrix;
     pc += conf->row*sizeof(bool*);
     for (int i = 1; i <= conf->row; i++)
         matrix[i] = pc + i*sizeof(conf->col*sizeof(bool));
-
     if(saveName == NULL)
         matGen(matrix, conf);
-    else; //Функция загрузки матрицы из сейва 
+    else
+        matrix = loadLog(matrix, saveName, conf);
+    removeOldLog();
     int i = 0;
     bool isContinue = true;
     while(i < conf->n_it && isContinue){
@@ -319,11 +322,11 @@ void startGame(config conf, char* saveName){
         else if (conf->rule == 'M')
             matrix = Moore(matrix, conf);
         int sum = 0;
+        saveLog(matrix, conf, i);
         for (int k = 1 ; k <= conf->row; k++)
             for (int j = 1; j <= conf->col; j++)
                 sum += matrix[k][j];
         isContinue = sum;
-        saveLog(matrix, conf, i);
         i++;
     } 
     free(matrix);

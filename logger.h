@@ -4,9 +4,10 @@
 
 #include "stdbool.h"
 #include "config.h"
-
-int n_save;
+#include <string.h>
 
 void saveLog(bool**, config , int );
 
-bool** loadLog(char* , config );
+bool** loadLog(bool**, char* , config );
+
+void removeOldLog();
