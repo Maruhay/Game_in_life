@@ -1,4 +1,5 @@
 #include "game.h"
+#include "logger.h"
 
 void matGen(bool** matrix, config conf){
     srand(time(NULL));
@@ -306,7 +307,7 @@ void startGame(config conf, char* saveName){
     pc += conf->row*sizeof(bool*);
     for (int i = 1; i <= conf->row; i++)
         matrix[i] = pc + i*sizeof(conf->col*sizeof(bool));
-
+    removeOldLog();
     if(saveName == NULL)
         matGen(matrix, conf);
     else; //Функция загрузки матрицы из сейва 
@@ -318,6 +319,7 @@ void startGame(config conf, char* saveName){
         else if (conf->rule == 'M')
             matrix = Moore(matrix, conf);
         int sum = 0;
+        saveLog(matrix, conf, i);
         for (int k = 1 ; k <= conf->row; k++)
             for (int j = 1; j <= conf->col; j++)
                 sum += matrix[k][j];

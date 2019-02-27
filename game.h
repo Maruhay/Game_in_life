@@ -8,7 +8,6 @@
 #include <unistd.h>
 #endif
 
-#include "stdbool.h"
 #include "config.h"
 
 void matGen(bool** , config );
