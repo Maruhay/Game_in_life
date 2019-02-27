@@ -314,6 +314,7 @@ void startGame(config conf, char* saveName){
     else
         matrix = loadLog(matrix, saveName, conf);
     removeOldLog();
+    removeOldImage();
     int i = 0;
     bool isContinue = true;
     while(i < conf->n_it && isContinue){
@@ -323,6 +324,8 @@ void startGame(config conf, char* saveName){
             matrix = Moore(matrix, conf);
         int sum = 0;
         saveLog(matrix, conf, i);
+        process_file(matrix, conf);
+        write_png_file(i);
         for (int k = 1 ; k <= conf->row; k++)
             for (int j = 1; j <= conf->col; j++)
                 sum += matrix[k][j];
@@ -330,4 +333,5 @@ void startGame(config conf, char* saveName){
         i++;
     } 
     free(matrix);
+    system("convert -delay 10 -loop 0 images/*.png images/game.gif");
 }
