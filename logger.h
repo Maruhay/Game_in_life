@@ -13,6 +13,8 @@ void process_file(bool** , config conf);
 
 void saveLog(bool**, config , int );
 
-bool** loadLog(char* , config );
+bool** loadLog(bool** , char*, config );
 
 void removeOldLog();
+
+void removeOldImage();

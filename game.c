@@ -301,17 +301,19 @@ void printMatrix(bool** matrix, config conf){
 }
 
 void startGame(config conf, char* saveName){
+    if(saveName != NULL)
+        loadRowCol(conf, saveName);
     //Memory for matrix
     bool ** matrix = malloc(conf->row*sizeof(bool*) + conf->row*conf->col*sizeof(bool));
     char * pc = matrix;
     pc += conf->row*sizeof(bool*);
     for (int i = 1; i <= conf->row; i++)
         matrix[i] = pc + i*sizeof(conf->col*sizeof(bool));
-    removeOldLog();
-    removeOldImage();
     if(saveName == NULL)
         matGen(matrix, conf);
-    else; //Функция загрузки матрицы из сейва 
+    else matrix = loadLog(matrix, saveName, conf);
+    removeOldLog();
+    removeOldImage();
     int i = 0;
     bool isContinue = true;
     while(i < conf->n_it && isContinue){

@@ -3,19 +3,22 @@
 void defaultConfig(config conf){
     conf->col = 15;
     conf->row = 15;
-    conf->n_it = 100;
+    conf->n_it = 50;
     conf->rule = 'M';
-    conf->out = 0; //'0' - "0 or 1"; '1' - "\u25d9 or \u25cb"
+    conf->out = 1; //'0' - "0 or 1"; '1' - "\u25d9 or \u25cb"
 }
 
-void userConfig(config conf){
+void userConfig(config conf, bool isSave){
     //
     //Проверка на правильность введённых данных
     //
-    printf("Number of rows: ");
-    scanf("%d", &conf->row);
-    printf("Number of columns: ");
-    scanf("%d", &conf->col);
+    conf->row = conf->col = 0;
+    if(!isSave){
+        printf("Number of rows: ");
+        scanf("%d", &conf->row);
+        printf("Number of columns: ");
+        scanf("%d", &conf->col);
+    }
     printf("Number of iterations: ");
     scanf("%d", &conf->n_it);
     printf("Choose the rules: ");
@@ -24,7 +27,7 @@ void userConfig(config conf){
     scanf("%d", &conf->out);
 }
 
-void chooseConfig(config conf){
+void chooseConfig(config conf, bool isSave){
     char temp;
     bool isOk;
     do{
@@ -35,7 +38,6 @@ void chooseConfig(config conf){
             char fname[20];
             printf("Please enter name of file: ");
             scanf(" %s", fname);
-            printf("FILE: %s\n ", fname);
             fileConfig(conf, fname);
         }
         else if (temp == 'n'){
@@ -47,7 +49,7 @@ void chooseConfig(config conf){
                     isOk = true;
                 }
                 else if(temp == 'n'){
-                    userConfig(conf);
+                    userConfig(conf, isSave);
                     isOk = true;
                 }
                 else{
@@ -83,4 +85,10 @@ void fileConfig(config conf, char* fname){
     //
     //Проверка правильности введённых данных
     //
+}
+
+void loadRowCol(config conf, char* fname){
+        FILE* file = fopen(fname, "r");
+    fscanf(file, "%d%d", &conf->row, &conf->col);
+    fclose(file);
 }

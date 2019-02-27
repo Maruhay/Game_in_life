@@ -105,6 +105,16 @@ void saveLog(bool** matrix, config conf, int n_it){
     fclose(file);
 }
 
+bool** loadLog(bool** matrix, char* fname, config conf){
+    FILE* file = fopen(fname, "r");
+    for(int i = 1; i <= conf->row; i++)
+        for(int j = 1; j <= conf->col; j++){
+            fscanf(file, "%d", &matrix[i][j]);
+            printf("%d\n", matrix[i][j]);
+        }
+    return matrix;
+}
+
 void removeOldLog(){
     int i = 0;
     char fname[20];

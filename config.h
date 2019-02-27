@@ -17,11 +17,13 @@ typedef struct Config{
     bool out;
 } *config;
 
-void defaultConfig(config conf);
+void defaultConfig(config);
 
-void userConfig(config conf);
+void userConfig(config, bool);
 
-void chooseConfig(config conf);
+void chooseConfig(config, bool);
 
-void fileConfig(config conf, char* fname);
+void fileConfig(config , char*);
+
+void loadRowCol(config , char*);
 #endif
