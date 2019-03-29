@@ -333,5 +333,5 @@ void startGame(config conf, char* saveName){
         i++;
     } 
     free(matrix);
-    system("convert -delay 10 -loop 0 images/*.png images/game.gif");
+    system("convert -delay 20 -loop 0 images/*.png images/game.gif");
 }

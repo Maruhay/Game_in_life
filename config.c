@@ -9,22 +9,29 @@ void defaultConfig(config conf){
 }
 
 void userConfig(config conf, bool isSave){
-    //
-    //Проверка на правильность введённых данных
-    //
     conf->row = conf->col = 0;
     if(!isSave){
-        printf("Number of rows: ");
-        scanf("%d", &conf->row);
-        printf("Number of columns: ");
-        scanf("%d", &conf->col);
+        printf("Number of rows (1 - 500): ");
+        do{
+            scanf("%d", &conf->row);
+        } while (conf->row < 1 || conf->row > 500);
+        printf("Number of columns (1 - 500): ");
+        do{
+            scanf("%d", &conf->col);
+        } while(conf->col < 1 || conf->col > 500);
     }
-    printf("Number of iterations: ");
-    scanf("%d", &conf->n_it);
-    printf("Choose the rules: ");
-    scanf(" %c", &conf->rule);
-    printf("Choose outpoot method: ");
-    scanf("%d", &conf->out);
+    printf("Number of iterations (1 - inf): ");
+    do{
+        scanf("%d", &conf->n_it);
+    } while(conf->n_it < 1);
+    printf("Choose the rules (M - Moore / N - von Neuman): ");
+    do{
+        scanf(" %c", &conf->rule);
+    } while(conf->rule != 'M' && conf->rule != 'N');
+    printf("Choose outpoot method (1 - \u25d9 / \u25cb); 0 - 0 / 1: ");
+    do{
+        scanf("%d", &conf->out);
+    } while(conf->out != 1 && conf->out != 0);
 }
 
 void chooseConfig(config conf, bool isSave){
@@ -77,14 +84,22 @@ void fileConfig(config conf, char* fname){
         return;
     }
     isOk = fscanf(file, "%d%d%d%c%d", &conf->col, &conf->row, &conf->n_it, &conf->rule, &conf->out);
+    if(conf->col < 0 || conf->col > 500)
+        isOk = false;
+    if(conf->row < 0 || conf->row > 500)
+        isOk = false;
+    if(conf->n_it < 1)
+        isOk = false;
+    if(conf->rule != 'M' && conf->rule != 'N')
+        isOk = false;
+    if(conf->out != 0 && conf->out != 1)
+        isOk = false;
     if(!isOk){
         printf("ERROR! Bad format of configuration's file. Configurations are setuped as default\n");
         defaultConfig(conf);
         return;
     }
-    //
-    //Проверка правильности введённых данных
-    //
+
 }
 
 void loadRowCol(config conf, char* fname){
