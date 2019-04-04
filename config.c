@@ -10,6 +10,7 @@ void defaultConfig(config conf){
 
 void userConfig(config conf, bool isSave){
     conf->row = conf->col = 0;
+    //If we have configuration's file, we shouldn't type number of
     if(!isSave){
         printf("Number of rows (1 - 500): ");
         do{
@@ -103,7 +104,7 @@ void fileConfig(config conf, char* fname){
 }
 
 void loadRowCol(config conf, char* fname){
-        FILE* file = fopen(fname, "r");
+    FILE* file = fopen(fname, "r");
     fscanf(file, "%d%d", &conf->row, &conf->col);
     fclose(file);
 }
