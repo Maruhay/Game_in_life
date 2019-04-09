@@ -304,11 +304,11 @@ void startGame(config conf, char* saveName){
     if(saveName != NULL)
         loadRowCol(conf, saveName);
     //Memory for matrix
-    bool ** matrix = malloc(conf->row*sizeof(bool*) + conf->row*conf->col*sizeof(bool));
+    bool ** matrix = malloc(conf->row * sizeof(bool*) + conf->row * conf->col * sizeof(bool));
     char * pc = matrix;
     pc += conf->row*sizeof(bool*);
     for (int i = 1; i <= conf->row; i++)
-        matrix[i] = pc + i*sizeof(conf->col*sizeof(bool));
+        matrix[i] = pc + i * sizeof(conf->col * sizeof(bool));
     if(saveName == NULL)
         matGen(matrix, conf);
     else
@@ -333,5 +333,6 @@ void startGame(config conf, char* saveName){
         i++;
     } 
     free(matrix);
+    //Making *.gif
     system("convert -delay 20 -loop 0 images/*.png images/game.gif");
 }
