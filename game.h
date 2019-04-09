@@ -9,6 +9,7 @@
 #endif
 
 #include "config.h"
+#include <time.h>
 
 void matGen(bool** , config );
 
